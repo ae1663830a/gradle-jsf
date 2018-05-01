@@ -9,7 +9,7 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Product</title>
+        <title>Jsf Example</title>
     </h:head>
     <h:body>
         <div class="ui-g">
@@ -18,6 +18,7 @@
                     <f:facet name="left">
                         <p:button href="/product-list.jsf" value="List of Products"/>
                         <p:button href="/product-form.jsf" value="New Product"/>
+                        <p:commandButton value="Product form" onclick="PF('dlg').show();" type="button" icon="ui-icon-extlink"/>
                     </f:facet>
                 </p:toolbar>
             </div>
@@ -25,6 +26,19 @@
                 <ui:insert name="content"/>
             </div>
         </div>
+        <h:form>
+            <p:dialog header="New product" widgetVar="dlg" focus="name" modal="true">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="name" value="Name:"/>
+                    <p:inputText id="name" label="name" value="#{productController.product.name}"/>
+                    <h:outputLabel for="price" value="Price:"/>
+                    <p:inputNumber id="price" label="price" value="#{productController.product.price}"> <!--valueChangeListener="#{productController.save}"-->
+                    <!--<p:ajax event="keyup" update="@this" global="false" ignoreAutoUpdate="true" immediate="true" />-->
+                    </p:inputNumber>
+                    <p:commandButton value="create" action="#{productController.save}"/>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
     </h:body>
 </f:view>
 </html>
